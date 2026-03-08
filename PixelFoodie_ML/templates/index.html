@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelFoodie AI | Smart Recommender</title>
+    <style>
+        /* Apple-style Dark Theme */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #1c1c1e;
+            padding: 40px;
+            border-radius: 20px; /* Rounded borders */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 350px;
+            text-align: center;
+            border: 1px solid #3a3a3c;
+        }
+        h1 { font-weight: 600; font-size: 24px; margin-bottom: 20px; color: #ff3b30; }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: none;
+            background: #2c2c2e;
+            color: white;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 12px;
+            border: none;
+            background: #ff3b30;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background: #ff453a; transform: scale(1.02); }
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #2c2c2e;
+            border-radius: 12px;
+            color: #32d74b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🍳 PixelFoodie AI</h1>
+        <form action="/predict" method="post">
+            <input type="number" name="spicy" placeholder="Spicy Level (1-5)" min="1" max="5" required>
+            <input type="number" name="time" placeholder="Cooking Time (mins)" required>
+            <select name="veg">
+                <option value="1">Vegetarian</option>
+                <option value="0">Non-Veg</option>
+            </select>
+            <select name="meal">
+                <option value="1">Breakfast</option>
+                <option value="2">Lunch/Dinner</option>
+                <option value="3">Snacks</option>
+            </select>
+            <select name="cuisine">
+                <option value="1">South Indian</option>
+                <option value="2">Western</option>
+                <option value="3">North Indian</option>
+            </select>
+            <button type="submit">Predict My Recipe</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            🌟 AI Suggestion: {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
