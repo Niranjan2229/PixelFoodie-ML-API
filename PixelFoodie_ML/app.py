@@ -10,6 +10,11 @@ CORS(app) # Idhai add pannunga
 # Namma create panna AI model-ah load panrom
 with open('pixel_model.pkl', 'rb') as f:
     model = pickle.load(f)
+    
+    @app.after_request
+def apply_caching(response):
+    response.headers["X-Frame-Options"] = "ALLOWALL"
+    return response
 
 @app.route('/')
 def home():
@@ -32,4 +37,5 @@ def predict():
     return render_template('index.html', prediction=prediction[0])
 
 if __name__ == '__main__':
+
     app.run(debug=True)
